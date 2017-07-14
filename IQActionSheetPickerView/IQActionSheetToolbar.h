@@ -26,10 +26,10 @@
 
 @interface IQActionSheetToolbar : UIToolbar
 
-@property(nullable, nonatomic, strong) UIBarButtonItem *cancelButton;
+@property (nullable, nonatomic, strong) UIBarButtonItem *cancelButton;
 
-@property(nullable, nonatomic, strong) IQActionSheetTitleBarButtonItem *titleButton;
+@property (nullable, nonatomic, strong) IQActionSheetTitleBarButtonItem *titleButton;
 
-@property(nullable, nonatomic, strong) UIBarButtonItem *doneButton;
+@property (nullable, nonatomic, strong) UIBarButtonItem *doneButton;
 
 @end

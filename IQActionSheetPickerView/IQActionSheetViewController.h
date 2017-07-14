@@ -28,9 +28,9 @@
 
 @interface IQActionSheetViewController : UIViewController
 
-@property(nonnull, nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
+@property (nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
 
--(void)showPickerView:(nonnull IQActionSheetPickerView*)pickerView completion:(nullable void (^)(void))completion;
--(void)dismissWithCompletion:(nullable void (^)(void))completion;
+- (void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion;
+- (void)dismissWithCompletion:(void (^)(void))completion;
 
 @end
