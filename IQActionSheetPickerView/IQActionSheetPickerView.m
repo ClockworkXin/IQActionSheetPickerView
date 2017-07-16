@@ -435,7 +435,7 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
 - (IQActionSheetToolbar *)actionToolbar
 {
     if (!_actionToolbar) {
-        _actionToolbar = [[IQActionSheetToolbar alloc] initWithFrame:CGRectMake(0, 0, VIEW_WIDTH, 44)];
+        _actionToolbar = [[IQActionSheetToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
         _actionToolbar.barStyle = UIBarStyleDefault;
         _actionToolbar.cancelButton.target = self;
         _actionToolbar.cancelButton.action = @selector(pickerCancelClicked:);
@@ -483,7 +483,9 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     _pickerView = nil;
     _datePicker = nil;
     _actionToolbar = nil;
-    [self removeAllSubviews];
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
     [self removeFromSuperview];
 }
 

@@ -24,7 +24,6 @@
 
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetPickerView.h"
-#import "UINavigationController+FDFullscreenPopGesture.h"
 
 @interface IQActionSheetViewController ()<UIApplicationDelegate, UIGestureRecognizerDelegate>
 
@@ -34,8 +33,6 @@
 
 - (void)loadView
 {
-    self.fd_interactivePopDisabled = YES;
-    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = NO;
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor clearColor];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
@@ -103,13 +100,17 @@
         _pickerView.frame = pickerViewFrame;
     } completion:^(BOOL finished) {
         //Removing pickerView from self.view
-        [_pickerView removeAllSubviews];
+        [_pickerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
         [_pickerView removeFromSuperview];
         _pickerView.delegate = nil;
         _pickerView = nil;
         //Removing self.view from topMostController.view and removing self as childViewController from topMostController
         [self willMoveToParentViewController:nil];
-        [self.view removeAllSubviews];
+        [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
         if (completion) completion();
